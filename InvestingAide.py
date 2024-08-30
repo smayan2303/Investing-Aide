@@ -205,8 +205,7 @@ with MA_and_Buy_Rating:
         st.write(f"""<div style='text-align: center; color: red; font-size: 4em; font-weight:bold'>{buyRating}</div>""", unsafe_allow_html=True)
 
     
-import requests
-from bs4 import BeautifulSoup
+
 
 with news:
     news_ticker = yf.Ticker(ticker)
