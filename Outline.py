@@ -1,3 +1,5 @@
+import appdirs as ad
+ad.user_cache_dir = lambda *args: "/tmp"
 import streamlit as st, pandas as pd, numpy as np, yfinance as yf
 import plotly.express as px
 from datetime import datetime,timedelta

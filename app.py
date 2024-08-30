@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import appdirs as ad
+ad.user_cache_dir = lambda *args: "/tmp"
 import yfinance as yf
 from datetime import datetime,timedelta
 from datetime import date
