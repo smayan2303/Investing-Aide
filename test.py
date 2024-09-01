@@ -1,5 +1,5 @@
 import streamlit as st, pandas as pd, numpy as np, yfinance as yf
-#import plotly.express as px
+import plotly.express as px
 from datetime import datetime,timedelta
 from datetime import date
 #import matplotlib.pyplot as plt
@@ -17,3 +17,7 @@ data = yf.download(ticker)
 
 
 data = data.loc[startDate:endDate].copy()
+
+
+fig = px.line(data, x = data.index, y = data["Adj Close"], title = ticker)
+st.plotly_chart(fig)
