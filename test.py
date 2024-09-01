@@ -216,43 +216,43 @@ MA_and_Buy_Rating, pricing_data, news, Gemini, tech_indicator = st.tabs(['Moving
 
 
 
-# from dotenv import load_dotenv
-# import os
+from dotenv import load_dotenv
+import os
 
-# load_dotenv()
-# api_key = os.getenv('API_KEY')
+load_dotenv()
+api_key = os.getenv('API_KEY')
 
-# import google.generativeai as genai
+import google.generativeai as genai
 
-# genai.configure(api_key=os.getenv('API_KEY'))
+genai.configure(api_key=os.getenv('API_KEY'))
 
-# model = genai.GenerativeModel('gemini-1.5-flash')
-# response1 = model.generate_content(f"3 Reasons to Buy {ticker} Stock(Do not include the disclaimer")
-# response2 = model.generate_content(f"3 Reasons to Sell {ticker} Stock(Do not include the disclaimer")
-# response3 = model.generate_content(f"SWOT Analysis of {ticker} stock")
-# with Gemini:
-#     buy_reason, sell_reason, swot_analysis = st.tabs(['3 Reasons to Buy', '3 Reasons to Sell', 'SWOT Analysis'])
+model = genai.GenerativeModel('gemini-1.5-flash')
+response1 = model.generate_content(f"3 Reasons to Buy {ticker} Stock(Do not include the disclaimer")
+response2 = model.generate_content(f"3 Reasons to Sell {ticker} Stock(Do not include the disclaimer")
+response3 = model.generate_content(f"SWOT Analysis of {ticker} stock")
+with Gemini:
+    buy_reason, sell_reason, swot_analysis = st.tabs(['3 Reasons to Buy', '3 Reasons to Sell', 'SWOT Analysis'])
 
-#     with buy_reason:
-#         st.write(response1.text)
+    with buy_reason:
+        st.write(response1.text)
 
-#     with sell_reason:
-#         st.write(response2.text)
+    with sell_reason:
+        st.write(response2.text)
 
-#     with swot_analysis:
-#         st.write(response3.text)
+    with swot_analysis:
+        st.write(response3.text)
 
-import pandas_ta as ta
+# import pandas_ta as ta
 
-with tech_indicator:
-    st.subheader('Technical Analysis Interface:')
-    df = pd.DataFrame()
-    ind_list = df.ta.indicators(as_list=True)
-    #st.write(ind_list)
-    technical_indicator = st.selectbox('Tech Indicator', options=ind_list, placeholder = 'bbands')
-    method = technical_indicator
-    indicator = pd.DataFrame(getattr(ta,method)(low = data['Low'], close=data['Close'], high=data['High'], open=data['Open'], volume = data['Volume']))
-    indicator['Close'] = data['Close']
-    fig2 = px.line(indicator, title = ticker)
-    st.plotly_chart(fig2)
-    st.write(indicator)
+# with tech_indicator:
+#     st.subheader('Technical Analysis Interface:')
+#     df = pd.DataFrame()
+#     ind_list = df.ta.indicators(as_list=True)
+#     #st.write(ind_list)
+#     technical_indicator = st.selectbox('Tech Indicator', options=ind_list, placeholder = 'bbands')
+#     method = technical_indicator
+#     indicator = pd.DataFrame(getattr(ta,method)(low = data['Low'], close=data['Close'], high=data['High'], open=data['Open'], volume = data['Volume']))
+#     indicator['Close'] = data['Close']
+#     fig2 = px.line(indicator, title = ticker)
+#     st.plotly_chart(fig2)
+#     st.write(indicator)
