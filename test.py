@@ -19,5 +19,5 @@ data = yf.download(ticker)
 data = data.loc[startDate:endDate].copy()
 
 
-fig = px.line(data, x = data.index, y = data["Adj Close"], title = ticker)
-st.plotly_chart(fig)
+# fig = px.line(data, x = data.index, y = data["Adj Close"], title = ticker)
+# st.plotly_chart(fig)
