@@ -27,7 +27,7 @@ data = data.loc[startDate:endDate].copy()
 fig = px.line(data, x = data.index, y = data["Adj Close"], title = ticker)
 st.plotly_chart(fig)
 
-MA_and_Buy_Rating, pricing_data, news, Gemini, tech_indicator = st.tabs(['Moving Averages and Buy Ratings','Pricing Data', 'Recent News', 'Gemini: AI Analysis', 'Technical Analysis'])
+MA_and_Buy_Rating, pricing_data, news, Gemini = st.tabs(['Moving Averages and Buy Ratings','Pricing Data', 'Recent News', 'Gemini: AI Analysis'])
 
 with pricing_data:
     st.header("Price Movements")
@@ -245,17 +245,18 @@ with Gemini:
     with swot_analysis:
         st.write(response3.text)
 
-import pandas_ta as ta
+# import pandas_ta as ta
 
-with tech_indicator:
-    st.subheader('Technical Analysis Interface:')
-    df = pd.DataFrame()
-    ind_list = df.ta.indicators(as_list=True)
-    #st.write(ind_list)
-    technical_indicator = st.selectbox('Tech Indicator', options=ind_list, placeholder = 'bbands')
-    method = technical_indicator
-    indicator = pd.DataFrame(getattr(ta,method)(low = data['Low'], close=data['Close'], high=data['High'], open=data['Open'], volume = data['Volume']))
-    indicator['Close'] = data['Close']
-    fig2 = px.line(indicator, title = ticker)
-    st.plotly_chart(fig2)
-    st.write(indicator)
+# with tech_indicator:
+#     st.subheader('Technical Analysis Interface:')
+#     df = pd.DataFrame()
+#     ind_list = df.ta.indicators(as_list=True)
+#     #st.write(ind_list)
+#     technical_indicator = st.selectbox('Tech Indicator', options=ind_list, placeholder = 'bbands')
+#     method = technical_indicator
+#     indicator = pd.DataFrame(getattr(ta,method)(low = data['Low'], close=data['Close'], high=data['High'], open=data['Open'], volume = data['Volume']))
+#     indicator['Close'] = data['Close']
+#     fig2 = px.line(indicator, title = ticker)
+#     st.plotly_chart(fig2)
+#     st.write(indicator)
+    
