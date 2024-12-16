@@ -19,7 +19,9 @@ endDate = st.sidebar.date_input('End Date (At Least 1 Year ahead of Start Date)'
 
 data = yf.download(ticker)
 stock = yf.Ticker(ticker)
-name = stock.info('longName')
+
+name = stock.info.get('longName', ticker)
+
 
 data = data.loc[startDate:endDate].copy()
 
