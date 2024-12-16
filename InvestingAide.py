@@ -18,13 +18,14 @@ startDate = st.sidebar.date_input("Start Day (At least 1 Year Ago)", max_value=o
 endDate = st.sidebar.date_input('End Date (At Least 1 Year ahead of Start Date)')
 
 data = yf.download(ticker)
-
+stock = yf.Ticker(ticker)
+name = stock.info('longName')
 
 data = data.loc[startDate:endDate].copy()
 
 
 
-fig = px.line(data, x = data.index, y = data["Adj Close"], title = ticker)
+fig = px.line(data, x = data.index, y = data["Adj Close"], title = name)
 st.plotly_chart(fig)
 
 MA_and_Buy_Rating, pricing_data, news, Gemini = st.tabs(['Moving Averages and Buy Ratings','Pricing Data', 'Recent News', 'Gemini: AI Analysis'])
@@ -82,7 +83,7 @@ with MA_and_Buy_Rating:
     shortSMA = 'SMA ' + str(SMAlower)
     longSMA = 'SMA ' + str(SMAupper)
     plt.legend(['Close', shortSMA, longSMA, 'Buy', 'Sell'])
-    plt.title(ticker + ' Closing Price and Simple Moving Averages')
+    plt.title(name + ' Closing Price and Simple Moving Averages')
     st.pyplot(fig)
 
 
@@ -120,7 +121,7 @@ with MA_and_Buy_Rating:
     shortEMA = 'EMA ' + str(EMAlower)
     longEMA = 'EMA ' + str(EMAupper)
     plt.legend(['Close', shortEMA, longEMA, 'Buy', 'Sell'])
-    plt.title(ticker + ' Closing Price and Exponential moving Averages')
+    plt.title(name + ' Closing Price and Exponential moving Averages')
     st.pyplot(fig)
 
 
@@ -230,9 +231,9 @@ import google.generativeai as genai
 genai.configure(api_key=os.getenv('API_KEY'))
 
 model = genai.GenerativeModel('gemini-1.5-flash')
-response1 = model.generate_content(f"3 Reasons to Buy {ticker} Stock(Do not include the disclaimer")
-response2 = model.generate_content(f"3 Reasons to Sell {ticker} Stock(Do not include the disclaimer")
-response3 = model.generate_content(f"SWOT Analysis of {ticker} stock")
+response1 = model.generate_content(f"3 Reasons to Buy {name} Stock(Do not include the disclaimer")
+response2 = model.generate_content(f"3 Reasons to Sell {name} Stock(Do not include the disclaimer")
+response3 = model.generate_content(f"SWOT Analysis of {name} stock")
 with Gemini:
     buy_reason, sell_reason, swot_analysis = st.tabs(['3 Reasons to Buy', '3 Reasons to Sell', 'SWOT Analysis'])
 
