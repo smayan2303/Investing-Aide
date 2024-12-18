@@ -65,7 +65,7 @@ with MA_and_Buy_Rating:
     
     longMA_input = st.slider('Enter the LONGER term moving average time frame for the SMA'   , min_value=10, max_value=200, value=50, step=1)
     shortMA_start = longMA_input / 2
-    shortMA_input = st.slider('Enter the SHORTER term moving average time frame for the SMA'   , min_value=5, max_value=longMA_input, value=int(shortMA_start), step=1)
+    shortMA_input = st.slider('Enter the SHORTER term moving average time frame for the SMA'   , min_value=5, max_value=int(longMA_input * 0.75), value=int(shortMA_start), step=1)
 
     SMAupper = int(longMA_input) 
     SMAlower = int(shortMA_input)
@@ -99,7 +99,7 @@ with MA_and_Buy_Rating:
 
 
     longEMA_input = st.slider('Enter the LONGER term exponential moving average time frame for the EMA'   , min_value=10, max_value=200, value=50, step=1)
-    shortEMA_input = st.slider('Enter the SHORTER term exponential moving average time frame for the EMA'   , min_value=5, max_value=longEMA_input, value=int(longEMA_input / 2), step=1)
+    shortEMA_input = st.slider('Enter the SHORTER term exponential moving average time frame for the EMA'   , min_value=5, max_value=int(longEMA_input * 0.75), value=int(longEMA_input / 2), step=1)
 
     EMAupper = int(longEMA_input) 
     EMAlower = int(shortEMA_input)
