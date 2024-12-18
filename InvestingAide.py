@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 st.title('Investing Aide')
 st.caption('A Stock Dashboard to help you find all stock metrics and help with technical analysis')
-ticker = st.sidebar.text_input('Ticker(Not Company Name)', 'AAPL')
+ticker = st.sidebar.text_input('Ticker (Not Company Name)', 'AAPL')
 today = datetime.today()
 one_year_back = today - timedelta(days=371)
 startDate = st.sidebar.date_input("Start Day (At least 1 Year Ago)", max_value=one_year_back)
@@ -51,12 +51,21 @@ with pricing_data:
 
 
 with MA_and_Buy_Rating:
+    st.write(f"<h2 style='text-align: center;'>{"What is a Moving Average?"}</h2>", unsafe_allow_html=True)
+    st.write("A moving average (MA) smooths price data over a specified period to identify trends by reducing noise. " + 
+             "When the shorter-term MA (green line) crosses above the longer-term MA (red line), it signals a potential uptrend, " + 
+             "while a crossover below indicates a potential downtrend. In the diagrams below, you can adjust moving average term " + 
+             "as desired but is recommended that you always have the LONGER term average be around 2 times greater " + 
+             "than the SHORTER term for best results.")
+    
+    st.write(f"<h3 style='text-align: center;'>{"Moving Average Graphs:"}</h3>", unsafe_allow_html=True)
     df = data
     df['% Change'] = (df['Adj Close'] / df['Adj Close'].shift(1) - 1) * 100
 
     
     longMA_input = st.slider('Enter the LONGER term moving average time frame for the SMA'   , min_value=10, max_value=200, value=50, step=1)
-    shortMA_input = st.slider('Enter the SHORTER term moving average time frame for the SMA'   , min_value=5, max_value=150, value=21, step=1)
+    shortMA_start = longMA_input / 2
+    shortMA_input = st.slider('Enter the SHORTER term moving average time frame for the SMA'   , min_value=5, max_value=longMA_input, value=int(shortMA_start), step=1)
 
     SMAupper = int(longMA_input) 
     SMAlower = int(shortMA_input)
@@ -90,7 +99,7 @@ with MA_and_Buy_Rating:
 
 
     longEMA_input = st.slider('Enter the LONGER term exponential moving average time frame for the EMA'   , min_value=10, max_value=200, value=50, step=1)
-    shortEMA_input = st.slider('Enter the SHORTER term exponential moving average time frame for the EMA'   , min_value=5, max_value=150, value=21, step=1)
+    shortEMA_input = st.slider('Enter the SHORTER term exponential moving average time frame for the EMA'   , min_value=5, max_value=longEMA_input, value=int(longEMA_input / 2), step=1)
 
     EMAupper = int(longEMA_input) 
     EMAlower = int(shortEMA_input)
@@ -201,7 +210,7 @@ with MA_and_Buy_Rating:
 
 
 
-    st.write(f"<h1 style='color:white; text-align: center;'>{"The Buy Rating is: "}</h1>", unsafe_allow_html=True)
+    st.write(f"<h1 style='text-align: center;'>{"The Buy Rating is: "}</h1>", unsafe_allow_html=True)
     if(FinalStockRating >= 0.5):
         st.write(f"""<div style='text-align: center; color: green; font-size: 4em; '>{buyRating}</div>""", unsafe_allow_html=True)
     else:
