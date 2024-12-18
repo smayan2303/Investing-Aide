@@ -63,7 +63,7 @@ with MA_and_Buy_Rating:
     df['% Change'] = (df['Adj Close'] / df['Adj Close'].shift(1) - 1) * 100
 
     
-    longMA_input = st.slider('Enter the LONGER term moving average time frame for the SMA'   , min_value=10, max_value=200, value=50, step=1)
+    longMA_input = st.slider('Enter the LONGER term moving average time frame for the SMA'   , min_value=10, max_value=300, value=50, step=1)
     shortMA_start = longMA_input / 2
     shortMA_input = st.slider('Enter the SHORTER term moving average time frame for the SMA'   , min_value=5, max_value=int(longMA_input * 0.75), value=int(shortMA_start), step=1)
 
@@ -98,7 +98,7 @@ with MA_and_Buy_Rating:
     st.pyplot(fig)
 
 
-    longEMA_input = st.slider('Enter the LONGER term exponential moving average time frame for the EMA'   , min_value=10, max_value=200, value=50, step=1)
+    longEMA_input = st.slider('Enter the LONGER term exponential moving average time frame for the EMA'   , min_value=10, max_value=300, value=50, step=1)
     shortEMA_input = st.slider('Enter the SHORTER term exponential moving average time frame for the EMA'   , min_value=5, max_value=int(longEMA_input * 0.75), value=int(longEMA_input / 2), step=1)
 
     EMAupper = int(longEMA_input) 
